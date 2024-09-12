@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "ito"
+version = "0.1.0"
+authors = ["suremarc"]
+description = "Ito integrals"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+polars = "^1.7.0"
+numpy = "^2.1.1"
+altair = "^5.4.1"
+vegafusion = "^1.6.9"
+vegafusion-python-embed = "^1.6.9"
+vl-convert-python = "^1.6.1"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.12.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
