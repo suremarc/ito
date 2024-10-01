@@ -1,12 +1,9 @@
 import contextlib
 from typing import Any
-from pprint import pprint
-from collections.abc import Iterable, Mapping
 
 import flightsql
 from flightsql.dbapi import Connection
 
-import ibis
 from ibis.backends.sql import SQLBackend
 import ibis.backends.sql.compilers as sc
 import ibis.expr.schema as sch
@@ -17,8 +14,9 @@ import sqlglot as sg
 import sqlglot.expressions as sge
 
 
-class MyBackend(SQLBackend):
-    name = "secret"
+# A DataFusion-over-FlightSQL backend.
+class FlightSQLDataFusionBackend(SQLBackend):
+    name = "flightsql(datafusion)"
     compiler = sc.DataFusionCompiler()
     dialect = "datafusion"
     supports_arrays = True
@@ -115,15 +113,3 @@ class MyBackend(SQLBackend):
 
     def _get_schema_using_query(self, query: str) -> sch.Schema:
         return sch.from_pyarrow_schema(self.con.client.execute(query).schema)
-
-
-if __name__ == "__main__":
-    client = flightsql.FlightSQLClient(host="localhost", port=50051, insecure=True)
-
-    ibis.options.verbose = True
-
-    conn = MyBackend.from_connection(flightsql.connect(client))
-
-    trades = conn.table("trades_v2", database="external.us_stocks_all")
-
-    print(trades.execute(limit=100))
