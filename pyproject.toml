@@ -7,16 +7,20 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
-polars = "^1.7.0"
-numpy = "^2.1.1"
-altair = "^5.4.1"
-vegafusion = "^1.6.9"
-vegafusion-python-embed = "^1.6.9"
-vl-convert-python = "^1.6.1"
+polars = "^1.7"
+numpy = "^2.1"
+altair = "^5.4"
+vegafusion = "^1.6"
+vegafusion-python-embed = "^1.6"
+vl-convert-python = "^1.6"
+ibis-framework = {extras = ["datafusion", "polars"], version = "^9.5.0"}
+flightsql-dbapi = "^0.2"
+sqlglot = "^25.20"
 
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.12.1"
+jupyter = "^1.1.1"
 
 [build-system]
 requires = ["poetry-core"]
